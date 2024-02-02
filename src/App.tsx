@@ -12,6 +12,7 @@ function App() {
 const [n, setN ] = useState<number>(0);
 const [ res, setRes ] = useState<number>(0);
 const [isLoading, setIsLoading] = useState<boolean>(false);
+
 const handleOnSubmit = (number: number)=>{
 setN(number)
 setIsLoading(true)
@@ -25,12 +26,13 @@ const handleOnResult = (result: number)=>{
 
   return (
     <>
-    <div className="flex w-full h-screen items-center justify-center p-48 bg-[#0C2D57]">
-      <div className="flex w-5/12 flex-col bg-[#EFECEC] items-center p-8 rounded-xl">
-      <h1 className="text-[#0C2D57] font-bold text-2xl">CALCULADORA SNGULAR</h1>
+    <div className="flex w-full h-screen items-center justify-center lg:p-48 p-8 bg-[#0C2D57]">
+      <div className="flex lg:w-5/12 sm:w-full flex-col bg-[#EFECEC] items-center p-8 rounded-xl">
+      <h1 className="text-[#0C2D57] font-bold lg:text-2xl text-lg">CALCULADORA SNGULAR</h1>
       <Form onSubmit={handleOnSubmit}/>
       <Calculator n={n} onResult={handleOnResult }/>
-      {isLoading ? <Loader/> : n > 0 && <Result value={res}/> }
+      {n <= 0 ? <div className="w-full text-black text-sm px-6 text-center">Escribe un número mayor a 0</div> : (isLoading ? <Loader/> : n > 0 && <Result value={res}/>) }
+      
       </div>
     
     </div>
